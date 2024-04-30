@@ -1,0 +1,40 @@
+# Description
+
+- Name: `AI Calculator`
+- Difficulty / Category: easy / high-school
+
+# Deploy
+
+```bash
+docker build -t aicalc -f ./Dockerfile .
+docker run -itd -e API_KEY=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 --name aicalc_container aicalc
+```
+
+This runs the challenge inside a container `aicalc_container` at port 11239. 
+
+Users can visit the challenge through nc:
+
+```bash
+nc <IP of the container> 11239
+```
+
+**Make sure to provide the deployed IP and port in the challenge description.**
+
+## About the API_KEY
+
+Do not send the API_KEY to players. The key is currently billed under Prof. Wenke Lee's lab account and will be destroyed after iCTF ends.
+
+The key is for accessing openai's model GPT3.5-turbo. The challenge has a PoW machenism to prevent API usage abuse. Pwning the challenge is OK and will not leak the API key, as players will not be able to get a shell or read other information.
+
+# Deliveries to Players
+
+All the files under the [src](./src/) directory should be delivered to the players.
+
+```bash
+zip ./src.zip -r ./src
+# Now, deliver src.zip to the players.
+```
+
+# Solution
+
+Please refer to the [writeup](./writeup/) directory.

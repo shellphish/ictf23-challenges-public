@@ -1,0 +1,134 @@
+take this PDDL domain description: '(define (domain castle_escape)
+    (:requirements :strips :typing :negative-preconditions)
+    (:types
+        room
+        key
+    )
+    (:predicates
+        (at ?r - room)
+        (opens_with ?r - room ?k1 - key ?k2 - key)
+        (opened_with ?r - room ?k1 - key ?k2 - key)
+        (has_key ?k - key ?r - room)
+        (got_key ?k - key)
+        (blocks ?r1 - room ?r2 - room)
+        (blocked ?r - room)
+    )
+
+    (:action move
+        :parameters (?from - room ?to - room ?bl - room ?k1 - key ?k2 - key)
+        :precondition (and (at ?from) (not (blocked ?to))
+                           (opens_with ?to ?k1 ?k2) (got_key ?k1) (got_key ?k2) (blocks ?to ?bl))
+        :effect (and (blocked ?bl) (not (at ?from)) (at ?to) (opened_with ?to ?k1 ?k2)
+        )
+    )
+
+    (:action pickup_key
+        :parameters (?r - room ?k - key)
+        :precondition (and (at ?r) (has_key ?k ?r))
+        :effect (got_key ?k)
+    )
+)
+'. Now take this PDDL problem description: '(define (problem castle_escape_problem)
+    (:domain castle_escape)
+    (:objects
+        whispering_gallery enchanted_hall mirror_chamber dragon_lair wizards_study
+        moonlit_grove shadowy_vault sunken_crypt frozen_cell phantom_corridor
+        serpents_nest knights_hall golden_sanctum crystal_cove mystic_garden
+        starlit_tower silent_tomb echoing_cavern haunted_chamber forbidden_throne - room
+        sapphire_key ruby_key emerald_key diamond_key amethyst_key
+        topaz_key opal_key pearl_key garnet_key onyx_key
+        moonstone_key sunstone_key quartz_key turquoise_key jade_key
+        obsidian_key amber_key citrine_key lapis_key agate_key - key
+    )
+    (:init
+
+;at
+In Whispering Gallery begins our tale,
+;opens_with
+Where shadows vault with topaz key and pearl so pale.
+In crypts sunken, opal and garnet lay,
+While frozen cells guard pearl and onyx in their sway.
+
+(opens_with phantom_corridor garnet_key moonstone_key)
+(opens_with enchanted_hall sapphire_key emerald_key)
+(opens_with mirror_chamber ruby_key diamond_key)
+(opens_with dragon_lair emerald_key amethyst_key)
+
+Wizards' study, where diamond meets topaz’s call,
+In groves moonlit, amethyst and opal enthrall.
+Halls of knights, where moonstone and quartz reside,
+In sanctums golden, sunstone and turquoise abide.
+
+(opens_with crystal_cove quartz_key jade_key)
+(opens_with mystic_garden turquoise_key obsidian_key)
+(opens_with starlit_tower jade_key amber_key)
+(opens_with echoing_cavern amber_key lapis_key)
+
+Chambers haunted, citrine and agate's might,
+Thrones forbidden, where lapis and agate's light.
+Nests of serpents, onyx and sunstone's hue,
+Tomb silent, obsidian and citrine's view.
+
+;has_key
+In the gallery that whispers, sapphire key does rest,
+With emerald key beside, in the very same nest.
+Ruby key in enchanted hall does dwell,
+Sunstone key in the corridor where phantoms tell.
+
+(has_key quartz_key serpents_nest)
+(has_key opal_key wizards_study)
+(has_key pearl_key moonlit_grove)
+(has_key garnet_key shadowy_vault)
+
+Onyx key in the crypt, sunken and deep,
+Moonstone key in the frozen cell's keep.
+Jade key in the hall where knights do parade,
+Obsidian key in the crystal cove's shade.
+
+(has_key amber_key mystic_garden)
+(has_key citrine_key starlit_tower)
+(has_key lapis_key silent_tomb)
+(has_key agate_key echoing_cavern)
+
+(has_key turquoise_key knights_hall)
+(has_key diamond_key enchanted_hall)
+(has_key diamond_key mirror_chamber)
+(has_key amethyst_key mirror_chamber)
+(has_key topaz_key mirror_chamber)
+(has_key topaz_key wizards_study)
+
+;blocks
+In verse, the castle's blockades we now state,
+Each line a path, each path a fate.
+
+Wizards' study blocks the mirror's gleam,
+Moonlit grove blocks the enchanted hall's dream.
+Mystic garden blocks the moonlit grove,
+Starlit tower blocks the crypt below.
+
+(blocks silent_tomb shadowy_vault)
+(blocks echoing_cavern moonlit_grove)
+(blocks haunted_chamber wizards_study)
+(blocks forbidden_throne whispering_gallery)
+
+Whispering gallery, enchanted hall blocks,
+Enchanted hall, whispering gallery locks.
+Mirror chamber, enchanted hall's gate,
+Dragon lair, whispering gallery's fate.
+
+(blocks knights_hall serpents_nest)
+(blocks crystal_cove serpents_nest)
+(blocks shadowy_vault wizards_study)
+(blocks sunken_crypt enchanted_hall)
+
+Frozen cell blocks the dragon's lair,
+Phantom corridor, shadowy vault's snare.
+Serpents' nest blocks the moonlit grove,
+Golden sanctum, moonlit grove's trove.
+)
+;goal
+And so the goal, clear and true,
+To reach the throne, forbidden view.
+
+)
+'. Now in the problem file, replace the lines in the poem with the predicate applications. Predicates are defined in the domain, use only the objects defined in the problem file for the predicate applications. The result must be a valid PDDL problem file.

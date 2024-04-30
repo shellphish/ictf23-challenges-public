@@ -1,0 +1,2 @@
+funk-svd@git+https://github.com/gbolmier/funk-svd
+pandas==2.1.3

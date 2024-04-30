@@ -1,0 +1,34 @@
+name: "bugdget"
+author: "Robert McLaughlin"
+category: misc
+description: "Keeping a budget is hard. We use a model-based approach to forecast what things you will be able to buy in the future."
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 100
+    minimum: 50
+
+image: .
+protocol: tcp
+host: null
+
+flags:
+  - ictf{wOw_Y0u_4Re_V3rY_R1Ch_8D}
+topics:
+    - remote applications
+
+# Tags are used to provide additional public tagging to a challenge
+# Can be removed if unused
+# Accepts strings
+tags:
+    - remote applications
+
+files:
+    - bugdget.zip
+
+state: visible
+
+# Specifies what version of the challenge specification was used.
+# Subject to change until ctfcli v1.0.0
+version: "0.1"

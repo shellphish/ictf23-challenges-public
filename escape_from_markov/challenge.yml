@@ -1,0 +1,38 @@
+name: "escape_from_markov"
+author: "Lukas Dresel (honululu)"
+category: data science
+description: |
+    We made a fake flag generator just for this CTF! It can generate flags that look like real flags, but they're not. Can you find the real flag?
+
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 100
+    minimum: 50
+
+image: .
+protocol: tcp
+host: null
+
+flags:
+  - ictf{mark0v_would-be_pROud}
+topics:
+    - machine learning
+
+tags:
+    - remote applications
+    - machine learning
+    - medium difficulty
+
+state: visible
+files:
+    - src/chall.py
+    - src/serve.sh
+    - Dockerfile
+
+state: visible
+
+# Specifies what version of the challenge specification was used.
+# Subject to change until ctfcli v1.0.0
+version: "0.1"

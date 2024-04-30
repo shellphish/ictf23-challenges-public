@@ -1,0 +1,30 @@
+# Description
+
+- Name: `Snake Game`
+- Difficulty / Category: hard / undergrad
+
+# Deploy
+
+```bash
+docker build -t snake -f ./Dockerfile .
+docker run -it --rm --name snake_container snake
+```
+
+This runs the challenge inside a container `snake_container` at port 8080. 
+
+Users can visit the challenge via http through a web browser (e.g., Chrome).
+
+**Make sure to provide the deployed http url in the challenge description.**
+
+# Deliveries to Players
+
+All the files under the [snake](./snake/) directory should be delivered to the players.
+
+```bash
+zip ./snake.zip -r ./snake
+# Now, deliver snake.zip to the players.
+```
+
+# Solution
+
+Please refer to the [writeup](./writeup/) directory.

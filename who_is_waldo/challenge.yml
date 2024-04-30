@@ -1,0 +1,146 @@
+# This file represents the base specification of your challenge. It is used by
+# other tools to install and deploy your challenge.
+
+# Required sections
+name: "Who is Waldo?"
+author: "iamgroot42"
+category: misc
+description: |
+    I have exactly 50 friends in high school (who I collectively refer to as 'Waldo'). As a fun side project, I once took 20 images from each of them and used these to train a model for smile detection. However, I woke up with a headache today and for some reason, cannot remember my friends' faces!
+    Fortunately, I still have the model I trained, along with a collection of images of all students from my high school (500). Can you help me look at the model and find out who 'Waldo' is?
+
+    You have access to the model itself, along with a directory containing 500 folders, one for each student, each with 20 images. Each image has the format x_y, where x is the image number (between 0-19) and y is the label (smiling/not smiling).
+    Each friend is associated with a number from 0 to 499, and each image is named from 0 to 19.
+    For your convenience, I have provided the script that I used to train the model (train.py), the model itself (model.pth), and all images (images.tar.gz). 
+
+    Now I know it's hard to find all 50 friends, but if I can find any one of them, I can probably find the rest.
+    Can you help me find *any* one of my friends?  Submit the id of the friend by submitting the flag in the format ictf{id}.
+    E.g. if you think 1 is my friend, submit ictf{1}
+
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 50
+    minimum: 50
+
+# Settings used for Dockerfile deployment
+# If not used, remove or set to null
+# If you have a Dockerfile set to .
+# If you have an imaged hosted on Docker set to the image url (e.g. python/3.8:latest, registry.gitlab.com/python/3.8:latest)
+# Follow Docker best practices and assign a tag
+image: null
+
+# Specify a protocol that should be used to connect to the running image
+# For example if the image is a website you can specify http or https
+# Otherwise you can specify tcp
+protocol: null
+
+# Specify a host to deploy the challenge onto.
+# The currently supported URI schemes are ssh:// and registry://
+# ssh is an ssh URI where the above image will be copied to and deployed (e.g. ssh://root@123.123.123.123)
+# registry is a Docker registry tag (e.g registry://registry.example.com/test/image)
+# host can also be specified during the deploy process: `ctf challenge deploy challenge --host=ssh://root@123.123.123.123`
+host: null
+
+# Optional settings
+
+# connection_info is used to provide a link, hostname, or instructions on how to connect to a challenge
+connection_info: null
+
+# healthcheck is a tool/script used to check a challenge
+# If connection_info was provided to CTFd when the challenge was installed, it will be passed to the healthcheck script:
+# ./writeup/exploit.sh --connection-info "nc hostname 12345"
+healthcheck: null
+
+# Can be removed if unused
+# attempts: 20
+
+# Flags specify answers that your challenge use. You should generally provide at least one.
+# Can be removed if unused
+# Accepts strings or dictionaries of CTFd API data
+flags:
+    # These (12) are the ones identified with a variant of LOSS
+    # [250, 306, 318, 325, 326, 327, 338, 340, 352, 360, 366, 368]
+    # Need a way to parse the flag such that an intersection operation is run with "waldo.txt" and success if >= 10 matches
+    # A static case sensitive flag
+    # - ictf{placeholder}
+    # A static case sensitive flag created with a dictionary
+    #- {
+    #    type: "static",
+    #    content: "flag{wat}",
+    #}
+    # A static case insensitive flag
+    #- {
+    #    type: "static",
+    #    content: "flag{wat}",
+    #    data: "case_insensitive",
+    #}
+    # A regex case insensitive flag
+    #- {
+    #    type: "regex",
+    #    content: "(.*)STUFF(.*)",
+    #    data: "case_insensitive",
+    #}
+    - {type: "regex",
+      content: "^ictf{(11|28|50|55|59|61|78|92|102|116|120|135|157|167|170|182|186|200|210|216|219|224|226|240|243|250|284|285|306|313|318|325|326|327|338|340|352|360|366|368|392|402|411|417|418|424|430|441|444|492)}$",
+      data: "case_insensitive",
+    }
+
+# Topics are used to help tell what techniques/information a challenge involves
+# They are generally only visible to admins
+# Accepts strings
+topics:
+    - ai
+    - privacy
+    - membership inference
+    - medium
+
+# Tags are used to provide additional public tagging to a challenge
+# Can be removed if unused
+# Accepts strings
+tags:
+    - ai
+    - privacy
+
+# Provide paths to files from the same directory that this file is in
+# Accepts strings
+files:
+    - train.py
+    - model.pth
+    - images.tar.gz
+
+# Hints are used to give players a way to buy or have suggestions. They are not
+# required but can be nice.
+# Can be removed if unused
+# Accepts dictionaries or strings
+no-hints:
+    - {
+        content: "Think of 'membership inference', a well known inference risk in machine learning. See if you can apply it here?",
+        cost: 0
+    }
+    - {
+        content: "Look at how the model is trained - might there be something special about the model's behavior when comparing train and non-train data?",
+        cost: 25
+    }
+    - {
+        content: "Each image can be associated with some score, but there are many ways to combine scores per user. Get creative!",
+        cost: 50
+    }
+    
+# Requirements are used to make a challenge require another challenge to be
+# solved before being available.
+# Can be removed if unused
+# Accepts challenge names as strings or challenge IDs as integers
+#requirements:
+#    - "Warmup"
+#    - "Are you alive"
+
+# The state of the challenge.
+# If the field is omitted, the challenge is visible by default.
+# If provided, the field can take one of two values: hidden, visible.
+state: visible
+
+# Specifies what version of the challenge specification was used.
+# Subject to change until ctfcli v1.0.0
+version: "0.1"

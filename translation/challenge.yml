@@ -1,0 +1,24 @@
+name: "Lost in Translation"
+author: "Stijn Pletinckx"
+category: misc
+description: "Hola Hacker! Per prendere la bandiera bei dieser Herausforderung, you need to neem de eerste letter de chaque mot och sammanfoga dem. Boa sorte!"
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 100
+    minimum: 50
+
+flags:
+  - ictf{HHPplbbdHyntndeldcmosdBs}
+
+no-hints:
+    - {
+        content: "Make sure the flag is in the iCTF format: ictf{your_flag_goes_here}",
+        cost: 10
+    }
+state: visible
+
+# Specifies what version of the challenge specification was used.
+# Subject to change until ctfcli v1.0.0
+version: "0.1"

@@ -1,0 +1,7 @@
+rm rustctf3; rustc rustctf3.rs -o rustctf3; ./rustctf3
+./ex3.py
+rm ./rustyneurone; rm target/release/rustyneurone; cargo build -r; cp target/release/rustyneurone .; ./rustyneurone
+rm ./rustyneurone; rm target/debug/rustyneurone; cargo build; cp target/debug/rustyneurone .; ./rustyneurone
+rm ./rustyneurone; rm target/debug/rustyneurone; cargo build; cp target/debug/rustyneurone .; strip -g -S -d --strip-debug ./rustyneurone; ./rustyneurone
+
+

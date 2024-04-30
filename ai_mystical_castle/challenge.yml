@@ -1,0 +1,143 @@
+# This file represents the base specification of your challenge. It is used by
+# other tools to install and deploy your challenge.
+
+# Required sections
+name: "Mystical Castle"
+author: "ilgris"
+category: misc
+description: |
+    In the mystical realm of Eldoria, a land shrouded in legends and whispered secrets, there lived a young adventurer named Alex. With a heart full of curiosity and a spirit as wild as the wind, Alex had always been drawn to the tales of old, the kind that grandparents would recount by the flickering fireside on starless nights. Among these tales, one stood out - the story of the ancient Castle of Shadows, a place where time seemed to stand still, and where every corridor and chamber held a secret waiting to be uncovered.
+
+    The castle, they said, was built by a forgotten monarch, a ruler so powerful that even the stones of the castle were imbued with magic. At the heart of this enigmatic fortress lay the Forbidden Throne Room, a place rumored to hold the key to a treasure beyond imagination or a curse that could doom a soul for eternity. No one knew for sure, for none who sought the throne had ever returned.
+
+    Alex's journey to the Castle of Shadows was not by choice. A fierce storm had swept through the land, and in seeking shelter, Alex stumbled upon the castle's hidden entrance, revealed only when the elements themselves conspired to open it. Within the castle's walls, Alex found themselves in the Whispering Gallery, a room where the walls seemed to murmur with the echoes of the past.
+
+    There, nestled between two ancient stone pillars, Alex discovered a book - old and bound in leather that whispered tales of its own. The book was filled with poems, each a cryptic guide to navigating the castle's treacherous rooms and corridors. The poems spoke of keys and blockades, of rooms with names like 'Moonlit Grove' and 'Mystic Garden'. It was as if the book had been waiting for Alex, a guide left by fate or fortune.
+
+    Realizing the book's significance, Alex felt a surge of purpose. The Forbidden Throne Room wasn't just a destination; it was a calling. Perhaps it was destiny or mere curiosity, but Alex knew that reaching the throne room was essential - not just for the potential treasure, but for the truth that lay within. There were stories etched in those ancient walls, secrets that the world had forgotten, and Alex was determined to uncover them.
+
+    With the book as their guide, Alex set forth on a journey through the Castle of Shadows, each poem a beacon in the dark, leading them closer to the heart of the mystery. The castle was a labyrinth of history and magic, and the Forbidden Throne Room was its most guarded secret.
+
+    The poems were not just instructions; they were part of the castle's soul, a narrative woven into the very fabric of the place. And as Alex journeyed deeper, unraveling the enigma of the Castle of Shadows, they realized that they were part of the story too - a new chapter in the legend of the Forbidden Throne.
+
+    Find a way to reach The Forbidden Throne Room using two parts of the book discovered in the Whispering Gallery, namely 'castle_domain.pddl' and 'castle_problem_poem.pddl'.
+
+    Once you found a plan to escape the castle, your flag content is the first two letters of each room visited in order.
+
+    E.g. if your path visits "phantom_hallway"->"moonlit_grove"->"mystic_garden" then your flag is "ictf{phmomy}".
+
+    To reproduce our solution exactly, you can use the `jan-dolejsi.pddl` plugin for VS Code with the http://solver.planning.domains/solve planning backend.
+
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 100
+    minimum: 50
+
+# Settings used for Dockerfile deployment
+# If not used, remove or set to null
+# If you have a Dockerfile set to .
+# If you have an imaged hosted on Docker set to the image url (e.g. python/3.8:latest, registry.gitlab.com/python/3.8:latest)
+# Follow Docker best practices and assign a tag
+image: null
+
+# Specify a protocol that should be used to connect to the running image
+# For example if the image is a website you can specify http or https
+# Otherwise you can specify tcp
+protocol: null
+
+# Specify a host to deploy the challenge onto.
+# The currently supported URI schemes are ssh:// and registry://
+# ssh is an ssh URI where the above image will be copied to and deployed (e.g. ssh://root@123.123.123.123)
+# registry is a Docker registry tag (e.g registry://registry.example.com/test/image)
+# host can also be specified during the deploy process: `ctf challenge deploy challenge --host=ssh://root@123.123.123.123`
+host: null
+
+# Optional settings
+
+# connection_info is used to provide a link, hostname, or instructions on how to connect to a challenge
+connection_info: null
+
+# healthcheck is a tool/script used to check a challenge
+# If connection_info was provided to CTFd when the challenge was installed, it will be passed to the healthcheck script:
+# ./writeup/exploit.sh --connection-info "nc hostname 12345"
+healthcheck: null
+
+# Can be removed if unused
+# attempts: 5
+
+# Flags specify answers that your challenge use. You should generally provide at least one.
+# Can be removed if unused
+# Accepts strings or dictionaries of CTFd API data
+flags:
+    # A static case sensitive flag
+    - ictf{whenmiwimoshsufrphsekncrmystsiecfo}
+    # A static case sensitive flag created with a dictionary
+    #- {
+    #    type: "static",
+    #    content: "flag{wat}",
+    #}
+    # A static case insensitive flag
+    #- {
+    #    type: "static",
+    #    content: "flag{wat}",
+    #    data: "case_insensitive",
+    #}
+    # A regex case insensitive flag
+    #- {
+    #    type: "regex",
+    #    content: "(.*)STUFF(.*)",
+    #    data: "case_insensitive",
+    #}
+
+# Topics are used to help tell what techniques/information a challenge involves
+# They are generally only visible to admins
+# Accepts strings
+topics:
+    - ai
+
+# Tags are used to provide additional public tagging to a challenge
+# Can be removed if unused
+# Accepts strings
+tags:
+    - ai
+    - planning
+
+# Provide paths to files from the same directory that this file is in
+# Accepts strings
+files:
+    - src/castle_domain.pddl
+    - src/castle_problem_poem.pddl
+    - src/story
+
+# Hints are used to give players a way to buy or have suggestions. They are not
+# required but can be nice.
+# Can be removed if unused
+# Accepts dictionaries or strings
+no-hints:
+    - {
+        content: "Maybe use a PDDL support in VS Code?",
+        cost: 0
+    }
+    - {
+        content: "Maybe ChatGPT understand the poetry in PDDL?",
+        cost: 0
+    }
+
+# Requirements are used to make a challenge require another challenge to be
+# solved before being available.
+# Can be removed if unused
+# Accepts challenge names as strings or challenge IDs as integers
+#requirements:
+#    - "Warmup"
+#    - "Are you alive"
+
+# The state of the challenge.
+# If the field is omitted, the challenge is visible by default.
+# If provided, the field can take one of two values: hidden, visible.
+state: visible
+
+# Specifies what version of the challenge specification was used.
+# Subject to change until ctfcli v1.0.0
+version: "0.1"

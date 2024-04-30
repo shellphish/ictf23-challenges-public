@@ -1,0 +1,22 @@
+name: "Trendy"
+author: "Robert McLaughlin"
+category: misc
+description: "There's something odd about this data, but I can't quite put my finger on it. Can you see what's going on?"
+value: 500
+type: dynamic
+extra:
+    initial: 500
+    decay: 100
+    minimum: 50
+
+flags:
+  - ictf{AlwAysPLotThEDAtAFiRSt}
+
+files:
+    - src/data.csv
+
+state: visible
+
+# Specifies what version of the challenge specification was used.
+# Subject to change until ctfcli v1.0.0
+version: "0.1"
